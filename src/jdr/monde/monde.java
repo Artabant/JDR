@@ -27,11 +27,9 @@ public class Monde {
 		int pointDeVie = sc.nextInt();
 		
 		System.out.println("Veuillez entrer vos point de degat : \n");
-		int degat = sc.nextInt();
+		int degats = sc.nextInt();
 		
-		Personnage joueur = new Personnage(nom, pointDeVie, degat) ; 
-		
-		
+		Personnage joueur = new Personnage(nom, pointDeVie, degats) ; 
 		
 		return joueur;
 		
@@ -52,9 +50,9 @@ public class Monde {
 		int pointDeVie = sc.nextInt();
 		
 		System.out.println("Veuillez entrer vos point de degat : \n");
-		int degat = sc.nextInt();
+		int degats = sc.nextInt();
 		
-		Monstres monstre = new Monstres(nom, pointDeVie, degat) ; 
+		Monstres monstre = new Monstres(nom, pointDeVie, degats) ; 
 		
 		
 		
