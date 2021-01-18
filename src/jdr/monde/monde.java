@@ -103,7 +103,7 @@ public class Monde {
 	
 	/**
 	 * effectue un combat entre un personnage et un monstre puis determine un vainqueur
-	 * @param personnage
+	 * @param personnage 
 	 * @param monstre
 	 * @return
 	 */
@@ -111,16 +111,18 @@ public class Monde {
 		
 		for (int i = 0; i < 60; i++) {
 			if (i % 2 == 0) {
-				personnage.pertePointDeVie(monstre.getDegats());
-				System.out.println("le personnage a pris : "+ monstre.getDegats());
+				monstre.attaquer(personnage);
+				/*personnage.pertePointDeVie(monstre.getDegats());
+				System.out.println("le personnage a pris : "+ monstre.getDegats());*/
 				if (personnage.getPointDeVie() < 0) {
 					System.out.println("Le monstre a gagné");
 					break;
 				}
 					
 			}else{
-				monstre.pertePointDeVie(personnage.getDegats());
-				System.out.println("le monstre a pris : "+ personnage.getDegats());
+				/*monstre.pertePointDeVie(personnage.getDegats());
+				System.out.println("le monstre a pris : "+ personnage.getDegats());*/
+				personnage.attaquer(monstre);
 				if (monstre.getPointDeVie() < 0) {
 					System.out.println("Le personnage a gagné");	
 					break;

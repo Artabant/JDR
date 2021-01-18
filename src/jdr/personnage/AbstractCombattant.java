@@ -1,6 +1,8 @@
 package jdr.personnage;
 
-public abstract class AbstractCombattant {
+import jdr.interfaces.Combattant;
+
+public abstract class AbstractCombattant implements Combattant{
 	
         public String nom;
         public int pointDeVie;
@@ -38,8 +40,6 @@ public abstract class AbstractCombattant {
 		public String toString() {
 			return "AbstractCombattant [nom=" + nom + ", pointDeVie=" + pointDeVie + ", degats=" + degats + "]";
 		}
-
 		
+
 }
-
-

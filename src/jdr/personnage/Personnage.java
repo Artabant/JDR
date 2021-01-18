@@ -1,5 +1,7 @@
 package jdr.personnage;
 
+import jdr.interfaces.Combattant;
+
 public class Personnage extends AbstractCombattant{
 
 
@@ -16,10 +18,10 @@ public class Personnage extends AbstractCombattant{
 	public void setPointDeVie(int pointDeVie) {
 		this.pointDeVie = pointDeVie;
 	}
-	public int getDegat() {
+	public int getDegats() {
 		return degats;
 	}
-	public void setDegat(int degat) {
+	public void setDegats(int degat) {
 		this.degats = degat;
 	}
 	public String getNom() {
@@ -33,8 +35,15 @@ public class Personnage extends AbstractCombattant{
 		return "Personnage [nom=" + this.nom + ", pointDeVie=" + this.pointDeVie + ", degat=" + this.degats + "]";
 	}
 	
-	public void pertePointDeVie(int pointDeDegatsEnemi) {
-		this.pointDeVie = this.pointDeVie - pointDeDegatsEnemi;
+	@Override
+	public void attaquer(Combattant adversaire) {
+		adversaire.defendre(this.getDegats());
+		System.out.println("[Personnage] Vous avez fait : "+this.getDegats()+" point de degats");
+	}
+
+	@Override
+	public void defendre(int degats) {
+		this.pointDeVie = this.pointDeVie - degats;	
 	}
 	
 
