@@ -8,7 +8,6 @@ public interface Combattant {
     public void setNom(String nom);
     public void setDegats(int degats);
     public void setPointDeVie(int pointDeVie);
-    
     public void attaquer(Combattant adversaire);
     public void defendre(int degats);
 
