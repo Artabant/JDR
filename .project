@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/JDR.md</name>
+			<type>1</type>
+			<location>C:/Users/artab/Downloads/JDR.md</location>
+		</link>
+	</linkedResources>
 </projectDescription>
