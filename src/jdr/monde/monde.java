@@ -61,6 +61,7 @@ public class Monde {
 		return monstre;
 	}
 	
+	
 	/**
 	 * 
 	 * @param joueur
@@ -69,6 +70,7 @@ public class Monde {
 		System.out.println(joueur);
 		System.out.println(monstre);
 	}
+	
 	
 	/**
 	 * Genereation du nom du monstre
@@ -85,11 +87,14 @@ public class Monde {
 		finNom.add("de feu");
 		finNom.add("de la mort");
 		
+		int min = 0;
 		int MaxDebutNom = debutNom.size();
-		int nombreAleatoireListDebutNom = 0 + (int)(Math.random() * ((MaxDebutNom - 0) + 1));
+		int rangeDebutNom = MaxDebutNom - 0 +1;
+        int nombreAleatoireListDebutNom = (int)(Math.random() * rangeDebutNom) + min;
 		
 		int MaxFinNom = finNom.size();
-		int nombreAleatoireListFinNom = 0 + (int)(Math.random() * ((MaxFinNom - 0) + 1));
+		int rangeFinNom = MaxFinNom - 0 +1;
+		int nombreAleatoireListFinNom = (int)(Math.random() * rangeFinNom) + min;
 		
 		String nom = debutNom.get(nombreAleatoireListDebutNom) +" "+ finNom.get(nombreAleatoireListFinNom);
 		
