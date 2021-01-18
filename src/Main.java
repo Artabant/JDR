@@ -8,9 +8,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//Personnage joueur = Monde.personnageFactory();
+		Personnage joueur = Monde.personnageFactory();
 		Monstres monstre = Monde.MonstreFactory();
-		Monde.afficherInformations(null, monstre);
+		Monde.afficherInformations(joueur, monstre);
+		Monde.combat(joueur, monstre);
 	}
 	
 	
