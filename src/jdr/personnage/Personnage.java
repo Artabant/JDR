@@ -1,20 +1,18 @@
 package jdr.personnage;
 
-public class Personnage {
+public class Personnage extends AbstractCombattant{
 
 	private int pointDeVie;
 	private int degat;
 	private String nom;
 	
-	
-	
-	
-	public Personnage(int pointDeVie, int degat, String nom) {
-		super();
-		this.pointDeVie = pointDeVie;
-		this.degat = degat;
+	public Personnage(String nom, int pointDeVie, int degats) {
+		super(nom, pointDeVie, degats);
 		this.nom = nom;
+		this.pointDeVie = pointDeVie;
+		this.degats = degats;
 	}
+	
 	public int getPointDeVie() {
 		return pointDeVie;
 	}
