@@ -1,7 +1,5 @@
 package jdr.personnage;
 
-import jdr.interfaces.Combattant;
-
 public class Monstres extends AbstractCombattant {
 
 	public Monstres(String nom, int pointDeVie, int degats) {
@@ -34,16 +32,5 @@ public class Monstres extends AbstractCombattant {
 		return "Monstre [nom=" + this.nom + ", pointDeVie=" + this.pointDeVie + ", degat=" + this.degats + "]";
 	}
 
-	@Override
-	public void attaquer(Combattant adversaire) {
-		adversaire.defendre(this.getDegats());
-		System.out.println("[Monstre] Vous avez fait : "+this.getDegats()+" point de degats");
-	}
-
-	@Override
-	public void defendre(int degats) {
-		this.pointDeVie = this.pointDeVie - degats;		
-	}
-	
 	
 }

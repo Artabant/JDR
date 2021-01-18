@@ -11,5 +11,6 @@ public interface Attaque {
     public void setDescription(String description);
     // Chance de toucher doit être compris entre 0 et 100 obligatoirement
     public void setChanceToucher(double chanceToucher); 
-
+    public int getDegats();
+	public void setDegats(int degats);
 }

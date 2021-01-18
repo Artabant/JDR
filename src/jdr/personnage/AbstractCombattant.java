@@ -12,6 +12,10 @@ public abstract class AbstractCombattant implements Combattant{
 			
 		}
         
+        public AbstractCombattant(String nom, int pointDeVie) {
+    		
+    	}
+        
 		public String getNom() {
 			return nom;
 		}
@@ -41,5 +45,12 @@ public abstract class AbstractCombattant implements Combattant{
 			return "AbstractCombattant [nom=" + nom + ", pointDeVie=" + pointDeVie + ", degats=" + degats + "]";
 		}
 		
-
+		public void attaquer(Combattant adversaire) {
+			adversaire.defendre(this.getDegats());
+			System.out.println("[Monstre] Vous avez fait : "+this.getDegats()+" point de degats");
+		}
+		
+		public void defendre(int degats) {
+			this.pointDeVie = this.pointDeVie - degats;	
+		}
 }

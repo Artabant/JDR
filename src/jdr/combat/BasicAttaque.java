@@ -1,5 +1,7 @@
 package jdr.combat;
 
+import java.util.Random;
+
 import jdr.interfaces.Attaque;
 import jdr.interfaces.Combattant;
 
@@ -10,9 +12,21 @@ public class BasicAttaque implements Attaque{
 	private double chanceToucher;
 	private int degats;
 
+	public BasicAttaque(String nom, String description, double chanceToucher, int degats) {
+		super();
+		this.nom = nom;
+		this.description = description;
+		this.chanceToucher = chanceToucher;
+		this.degats = degats;
+	}
+
 	@Override
 	public int LancerAttaque(Combattant lanceur, Combattant cible) {
-		// TODO Auto-generated method stub
+		int nbAleatoire = new Random().nextInt(100);
+		if (nbAleatoire < chanceToucher) {
+			return lanceur.getDegats();
+		}
+		
 		return 0;
 	}
 

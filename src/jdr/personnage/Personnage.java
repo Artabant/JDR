@@ -14,11 +14,10 @@ public class Personnage extends AbstractCombattant{
 		this.degats = degats;
 	}
 	
-	public Personnage(String nom, int pointDeVie, int degats, Classe classe) {
-		super(nom, pointDeVie, degats);
+	public Personnage(String nom, int pointDeVie, Classe classe) {
+		super(nom, pointDeVie);
 		this.nom = nom;
 		this.pointDeVie = pointDeVie;
-		this.degats = degats;
 		this.classe = classe;
 	}
 
@@ -56,14 +55,10 @@ public class Personnage extends AbstractCombattant{
 	
 	@Override
 	public void attaquer(Combattant adversaire) {
-		adversaire.defendre(this.getDegats());
-		System.out.println("[Personnage] Vous avez fait : "+this.getDegats()+" point de degats");
+		this.degats = this.classe.getAttaque().getDegats();
+		adversaire.defendre(this.classe.getAttaque().LancerAttaque(this, adversaire));
+		System.out.println("["+this.nom+"] Vous avez fait : "+this.getDegats()+" point de degats avec "+this.classe.getAttaque().getNom());
+		System.out.println("PV du monstre : "+adversaire.getPointDeVie());
 	}
-
-	@Override
-	public void defendre(int degats) {
-		this.pointDeVie = this.pointDeVie - degats;	
-	}
-	
 
 }
