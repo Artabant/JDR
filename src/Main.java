@@ -13,11 +13,11 @@ public class Main {
 		//Monde.afficherInformations(joueur, monstre);
 		//Monde.combat(joueur, monstre);
 		
-		
 		Monde.creationClasse();
 		Groupe personnages = Monde.creationGroupePersonnage(4);
 		Groupe monstres = Monde.creationGroupeMonstre(4);
 		Monde.genese(personnages, monstres);
+
 		
 	}
 }

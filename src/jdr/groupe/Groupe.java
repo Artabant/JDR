@@ -81,15 +81,18 @@ public class Groupe implements Combattant {
 		
 		int maxGroupe2 = this.listeCombattant.size();
 		int nombreAleatoireGroupe2 = new Random().nextInt(maxGroupe2);		
-		Combattant attaquant = adversaires.listeCombattant.get(nombreAleatoireGroupe2);
+		Combattant attaquant = this.listeCombattant.get(nombreAleatoireGroupe2);
 		
+		attaquant.attaquer(adversaire);
+		/*
 		if(attaquant instanceof Personnage) {
-			
-			attaquant.attaquer(adversaires);
+			attaquant = (Personnage) this.listeCombattant.get(nombreAleatoireGroupe2);
+			System.out.println("personnage attaque");
+			attaquant.attaquer(adversaire);
 		}else {
-			
-			attaquant.attaquer(adversaires);
-		}
+			System.out.println("monstre attaque");
+			attaquant.attaquer(adversaire);
+		}*/
 	}
 
 	public Combattant defence() {
