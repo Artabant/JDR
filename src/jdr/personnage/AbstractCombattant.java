@@ -7,6 +7,10 @@ public abstract class AbstractCombattant implements Combattant{
         public String nom;
         public int pointDeVie;
         public int degats;
+        
+        public AbstractCombattant() {
+			
+		}
 
         public AbstractCombattant(String nom, int pointDeVie, int degats) {
 			

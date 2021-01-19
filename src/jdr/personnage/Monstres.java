@@ -1,6 +1,10 @@
 package jdr.personnage;
 
 public class Monstres extends AbstractCombattant {
+	
+	public Monstres() {
+		
+	}
 
 	public Monstres(String nom, int pointDeVie, int degats) {
 		super(nom, pointDeVie, degats);
@@ -31,6 +35,4 @@ public class Monstres extends AbstractCombattant {
 	public String toString() {
 		return "Monstre [nom=" + this.nom + ", pointDeVie=" + this.pointDeVie + ", degat=" + this.degats + "]";
 	}
-
-	
 }

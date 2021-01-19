@@ -6,15 +6,19 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import jdr.combat.BasicAttaque;
+import jdr.groupe.Groupe;
 import jdr.interfaces.Attaque;
+import jdr.interfaces.Combattant;
 import jdr.personnage.Classe;
 import jdr.personnage.Monstres;
 import jdr.personnage.Personnage;
 
 public class Monde {
 
-	static List<String> debutNom = new ArrayList<>();
-	static List<String> finNom = new ArrayList<>();
+	static List<String> debutNomMonstre = new ArrayList<>();
+	static List<String> finNomMonstre = new ArrayList<>();
+	static List<String> debutNomPersonnage = new ArrayList<>();
+	static List<String> finNomPersonnage = new ArrayList<>();
 	static Scanner sc = new Scanner(System.in);
 	static HashMap<String, Classe> listeClasse = new HashMap<String, Classe>();
 
@@ -24,14 +28,15 @@ public class Monde {
 	 */
 	public static Personnage personnageFactory() {
 
-		sc.nextLine();
-
 		System.out.println("Veuillez choisir un nom : ");
-		String nom = sc.nextLine();
+		String nom = sc.next();
 		
 		System.out.println("Veuillez choisir une classe : ");
-		System.out.println(listeClasse);
-		String nomClasse = sc.nextLine();
+		for(String i : listeClasse.keySet()) {
+			System.out.println(i);
+		}
+		//System.out.println(listeClasse);
+		String nomClasse = sc.next();
 
 		System.out.println("Veuillez entrer vos point de vie : \n");
 		int pointDeVie = sc.nextInt();
@@ -49,8 +54,6 @@ public class Monde {
 	 * @return
 	 */
 	public static Monstres MonstreFactory(){
-		
-		sc.nextLine();
 		
 		String nom = nomMonstre();
 
@@ -70,9 +73,9 @@ public class Monde {
 	 * 
 	 * @param joueur
 	 */
-	public static void afficherInformations(Personnage joueur, Monstres monstre) {
-		System.out.println(joueur);
-		System.out.println(monstre);
+	public static void afficherInformations(Groupe personnages, Groupe monstres) {
+		System.out.println(personnages);
+		System.out.println("\n"+monstres);
 	}
 
 
@@ -83,24 +86,24 @@ public class Monde {
 	public static String nomMonstre() {
 
 		/* ajouter des debut de nom des monstres dans la liste debutNom */
-		debutNom.add("chat");
-		debutNom.add("chien");
-		debutNom.add("chaton");
+		debutNomMonstre.add("chat");
+		debutNomMonstre.add("chien");
+		debutNomMonstre.add("chaton");
 
-		/* ajouter des fin de nom des monstres dans la liste finNom */
-		finNom.add("mechant");
-		finNom.add("de feu");
-		finNom.add("de la mort");
+		/* ajouter des fin de nom des personnage dans la liste finNom */
+		finNomMonstre.add("mechant");
+		finNomMonstre.add("de feu");
+		finNomMonstre.add("de la mort");
 
 
-		int MaxDebutNom = debutNom.size();
+		int MaxDebutNom = debutNomMonstre.size();
 		int nombreAleatoireListDebutNom = new Random().nextInt(MaxDebutNom);
 
-		int MaxFinNom = finNom.size();
+		int MaxFinNom = finNomMonstre.size();
 		int nombreAleatoireListFinNom = new Random().nextInt(MaxFinNom);
 
 
-		String nom = debutNom.get(nombreAleatoireListDebutNom) +" "+ finNom.get(nombreAleatoireListFinNom);
+		String nom = debutNomMonstre.get(nombreAleatoireListDebutNom) +" "+ finNomMonstre.get(nombreAleatoireListFinNom);
 
 		return nom;
 	}
@@ -145,7 +148,8 @@ public class Monde {
 	}
 
 	public static Classe getClasse(String nomClasse) {
-		return listeClasse.get(nomClasse);
+
+		return  listeClasse.get(nomClasse);
 	}
 	
 	public static void generationClasse() {
@@ -154,10 +158,8 @@ public class Monde {
 		
 		while (continuerClasse == 'o') {
 			
-			sc.nextLine();
-			
 			System.out.println("nom de la classe :");
-			String nomClasse = sc.nextLine();
+			String nomClasse = sc.next();
 			List<Attaque> listeAttaque = generationAttaque();
 			Classe classe = new Classe(nomClasse,listeAttaque);
 			
@@ -174,24 +176,26 @@ public class Monde {
 		
 		char continuer = 'o';
 		List<Attaque> listeAttaque = new ArrayList<>();
+		BasicAttaque attaque = new  BasicAttaque();
 		
 		while (continuer == 'o') {
 			
-			sc.nextLine();
-			
 			System.out.println("nom de l'attaque :");
-			String nomAttaque = sc.nextLine();
+			String nomAttaque = sc.next();
+			attaque.setNom(nomAttaque);
 			
 			System.out.println("description :");
-			String description = sc.nextLine();
+			String description = sc.next();
+			attaque.setDescription(description);
 			
 			System.out.println("Chance de réussite :");
 			double chanceToucher = sc.nextDouble();
+			attaque.setChanceToucher(chanceToucher);
 			
 			System.out.println("degats de l'attaque :");
 			int degatsAttaque = sc.nextInt();
-			
-			BasicAttaque attaque = new  BasicAttaque(nomAttaque,description,chanceToucher,degatsAttaque);
+			attaque.setDegats(degatsAttaque);
+
 			listeAttaque.add(attaque);
 			
 			System.out.println("voulez vous ajouter une autre attaque ? (o/n)");
@@ -202,5 +206,199 @@ public class Monde {
 		return listeAttaque;
 	}
 	
+	public static void creationClasse() {
+		
+		List<Attaque> listeAttaque1 = new ArrayList<>();
+		BasicAttaque attaque1 = new  BasicAttaque("boule de feu","lance une boule de feu",50.0,40);
+		BasicAttaque attaque2 = new  BasicAttaque("tornade","lance une tornade",40.0,55);
+		BasicAttaque attaque3 = new  BasicAttaque("lance de glace","creer une lance de glace",45.0,50);
+		
+		listeAttaque1.add(attaque1);
+		listeAttaque1.add(attaque2);
+		listeAttaque1.add(attaque3);
+		
+		Classe classe1 = new Classe("mage",listeAttaque1);
+		listeClasse.put("mage", classe1);
+		
+		List<Attaque> listeAttaque2 = new ArrayList<>();
+		BasicAttaque attaque4 = new  BasicAttaque("coup boubou","donne un coup de bouclier",100.0,30);
+		BasicAttaque attaque5 = new  BasicAttaque("coup d'épée","donne un coup d'épée",60.0,60);
+		BasicAttaque attaque6 = new  BasicAttaque("lancer de bouclier","lancer votre bouclier",50.0,50);
+		
+		listeAttaque2.add(attaque4);
+		listeAttaque2.add(attaque5);
+		listeAttaque2.add(attaque6);
+		
+		Classe classe2 = new Classe("chevalier",listeAttaque2);
+		listeClasse.put("chevalier", classe2);
+		
+		List<Attaque> listeAttaque3 = new ArrayList<>();
+		BasicAttaque attaque7 = new  BasicAttaque("coup sournois","donne un coup de dague dans le dos",50.0,70);
+		BasicAttaque attaque8 = new  BasicAttaque("lancer dague","lancer votre dague",60.0,60);
+		BasicAttaque attaque9 = new  BasicAttaque("poison","lance du poison sur votre adversaire",40.0,30);
+		
+		listeAttaque3.add(attaque7);
+		listeAttaque3.add(attaque8);
+		listeAttaque3.add(attaque9);
+		
+		Classe classe3 = new Classe("assasin",listeAttaque3);
+		listeClasse.put("assasin", classe3);
+	}
+	
+	public static Groupe creationGroupeMonstre(int nombreMonstre) {
+		
+		Groupe groupeMonstre = new Groupe();
+		List<Combattant> listeMonstre = new ArrayList<>();
+		
+		int maxPvMonstre = 200;
+		
+		int maxDegatMonstre = 50;
+		
+		Monstres monstre = new Monstres() ; 
+		
+		for (int i = 0; i < nombreMonstre; i++) {
+			
+			int pvMonstre = new Random().nextInt(maxPvMonstre);
+			int degatMonstre = new Random().nextInt(maxDegatMonstre);
+			
+			String nomMonstre = nomMonstre();
+			monstre.setNom(nomMonstre);
+			monstre.setPointDeVie(pvMonstre);
+			monstre.setDegats(degatMonstre);
+			
+			listeMonstre.add(monstre);
+			
+		}
+		groupeMonstre.setListeCombattant(listeMonstre);
+		
+		return groupeMonstre;
 
+	}
+	
+	public static Groupe creationGroupePersonnage(int nombrePersonnage) {
+		
+		Groupe groupePersonnage = new Groupe();
+		List<Combattant> listePersonnage = new ArrayList<>();
+				
+		int maxPvPersonnage = 200;
+		
+		int classePersonnageNb = listeClasse.size();
+		
+		Personnage personnage = new Personnage() ; 
+		
+		for (int i = 0; i < nombrePersonnage; i++) {
+			
+			int pvPersonnage = new Random().nextInt(maxPvPersonnage);
+			
+			String nom = nomPersonnage();
+			
+			personnage.setNom(nom);
+			personnage.setPointDeVie(pvPersonnage);
+			personnage.setDegats(0);
+			
+			if(nom.substring(0,1) == "m") {
+				personnage.setClasse(getClasse("mage"));
+			}else if(nom.substring(0,1) == "c") {
+				personnage.setClasse(getClasse("chevalier"));
+			}else {
+				personnage.setClasse(getClasse("assasin"));
+			}
+				
+			listePersonnage.add(personnage);
+			
+		}
+		groupePersonnage.setListeCombattant(listePersonnage);
+		
+		System.out.println(groupePersonnage);
+		
+		return groupePersonnage;
+
+	}
+	
+	public static String nomPersonnage() {
+
+		/* ajouter des debut de nom des personnage dans la liste debutNom */
+		debutNomPersonnage.add("mage");
+		debutNomPersonnage.add("chevalier");
+		debutNomPersonnage.add("assasin");
+
+		/* ajouter des fin de nom des personnage dans la liste finNom */
+		finNomPersonnage.add("Jean");
+		finNomPersonnage.add("Pierre");
+		finNomPersonnage.add("Paul");
+		finNomPersonnage.add("Lucie");
+		finNomPersonnage.add("Marie");
+
+
+		int MaxDebutNom = debutNomPersonnage.size();
+		int nombreAleatoireListDebutNom = new Random().nextInt(MaxDebutNom);
+
+		int MaxFinNom = finNomPersonnage.size();
+		int nombreAleatoireListFinNom = new Random().nextInt(MaxFinNom);
+
+
+		String nom = debutNomPersonnage.get(nombreAleatoireListDebutNom) +" "+ finNomPersonnage.get(nombreAleatoireListFinNom);
+
+		return nom;
+		
+	}
+	
+	public static void genese(Groupe personnages , Groupe monstres) {
+		System.out.println("---*---Bonjoue---*---");
+		System.out.println("Choisir une option : ");
+		System.out.println("1 : Lancer un combat 1v1");
+		System.out.println("2 : Lancer un combat de groupe");
+		System.out.println("3 : One vs World Hardcore Edition");
+		System.out.println("4 : Informations du monde");
+		System.out.println("Votre choix : ");
+		int choix = sc.nextInt();
+		
+		switch (choix) {
+			case 1 :
+				combat1v1(personnages,monstres);
+				break;
+			case 2 :
+				combatGroupe(personnages,monstres);
+				break;
+			case 3 :
+				combatSolo(personnages,monstres);
+				break;
+			case 4 :
+				information(personnages,monstres);
+				break;
+		}
+	}
+	
+	public static void combat1v1(Groupe personnages , Groupe monstres) {
+			
+		System.out.println("Selectionner votre personnage : ");
+		for (int i = 0; i < personnages.getListeCombattant().size(); i++ ) {
+			System.out.println(i+" : "+personnages.getListeCombattant().get(i));
+		}
+		System.out.println("Votre choix de personnage : ");
+		int personnageId = sc.nextInt();
+		
+		System.out.println("Selectionner le monstre : ");
+		for (int y = 0; y < personnages.getListeCombattant().size(); y++ ) {
+			System.out.println(y+" : "+monstres.getListeCombattant().get(y));
+		}
+		System.out.println("Votre choix de monstre : ");
+		int monstreId = sc.nextInt();
+		
+		Personnage personnage = (Personnage) personnages.getListeCombattant().get(personnageId);
+		Monstres monstre = (Monstres) monstres.getListeCombattant().get(monstreId);
+		
+		combat(personnage,monstre);
+		
+		
+	}
+	public static void combatGroupe(Groupe personnages , Groupe monstres) {
+		
+	}
+	public static void combatSolo(Groupe personnages , Groupe monstres) {
+		
+	}
+	public static void information(Groupe personnages , Groupe monstres) {
+		System.out.println(personnages);
+	}
 }

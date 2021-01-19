@@ -11,6 +11,11 @@ public class BasicAttaque implements Attaque{
 	private String description;
 	private double chanceToucher;
 	private int degats;
+	
+	public BasicAttaque() {
+		super();
+		
+	}
 
 	public BasicAttaque(String nom, String description, double chanceToucher, int degats) {
 		super();
@@ -23,11 +28,14 @@ public class BasicAttaque implements Attaque{
 	@Override
 	public int LancerAttaque(Combattant lanceur, Combattant cible) {
 		int nbAleatoire = new Random().nextInt(100);
-		if (nbAleatoire < chanceToucher) {
+		if (nbAleatoire < this.chanceToucher) {
 			return lanceur.getDegats();
+		}else {
+			System.out.println("l'attaque a échoué");
+			return 0;
 		}
 		
-		return 0;
+		
 	}
 
 	public String getNom() {
@@ -62,7 +70,12 @@ public class BasicAttaque implements Attaque{
 		this.degats = degats;
 	}
 
-
+	@Override
+	public String toString() {
+		return "BasicAttaque [nom=" + nom + ", description=" + description + ", chanceToucher=" + chanceToucher
+				+ ", degats=" + degats + "]";
+	}
+	
 	
 
 }

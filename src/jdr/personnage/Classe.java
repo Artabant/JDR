@@ -37,4 +37,11 @@ public class Classe {
 		return attaque;
 	}
 
+	@Override
+	public String toString() {
+		return "Classe [nom=" + nom + ", listeAttaque=" + listeAttaque + "]";
+	}
+	
+	
+
 }

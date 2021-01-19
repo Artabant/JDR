@@ -5,8 +5,11 @@ import jdr.interfaces.Combattant;
 public class Personnage extends AbstractCombattant{
 	
 	private Classe classe;
+	
+	public Personnage() {
 
-
+	}
+	
 	public Personnage(String nom, int pointDeVie, int degats) {
 		super(nom, pointDeVie, degats);
 		this.nom = nom;
@@ -50,14 +53,15 @@ public class Personnage extends AbstractCombattant{
 
 	@Override
 	public String toString() {
-		return "Personnage [nom=" + this.nom + ", pointDeVie=" + this.pointDeVie + ", degat=" + this.degats + "]";
+		return "Personnage [nom=" + this.nom + ", pointDeVie=" + this.pointDeVie + ", degat=" + this.degats + ", classe="+this.classe+"]";
 	}
 	
 	@Override
-	public void attaquer(Combattant adversaire) {
+	public void attaquer(Combattant adversaire) {	
+		
 		this.degats = this.classe.getAttaque().getDegats();
+		System.out.println("["+this.nom+"] attaque : "+adversaire.getNom()+" avec "+this.classe.getAttaque().getNom()+" "+this.degats);
 		adversaire.defendre(this.classe.getAttaque().LancerAttaque(this, adversaire));
-		System.out.println("["+this.nom+"] Vous avez fait : "+this.getDegats()+" point de degats avec "+this.classe.getAttaque().getNom());
 		System.out.println("PV du monstre : "+adversaire.getPointDeVie());
 	}
 
