@@ -220,9 +220,9 @@ public class Monde {
 	public static void creationClasse() {
 
 		List<Attaque> listeAttaque1 = new ArrayList<>();
-		BasicAttaque attaque1 = new  BasicAttaque("boule de feu","lance une boule de feu",50.0,40);
-		BasicAttaque attaque2 = new  BasicAttaque("tornade","lance une tornade",40.0,55);
-		BasicAttaque attaque3 = new  BasicAttaque("lance de glace","creer une lance de glace",45.0,50);
+		BasicAttaque attaque1 = new  BasicAttaque("boule de feu","lance une boule de feu",100.0,40);
+		BasicAttaque attaque2 = new  BasicAttaque("tornade","lance une tornade",100.0,55);
+		BasicAttaque attaque3 = new  BasicAttaque("lance de glace","creer une lance de glace",100.0,50);
 
 		listeAttaque1.add(attaque1);
 		listeAttaque1.add(attaque2);
@@ -233,8 +233,8 @@ public class Monde {
 
 		List<Attaque> listeAttaque2 = new ArrayList<>();
 		BasicAttaque attaque4 = new  BasicAttaque("coup boubou","donne un coup de bouclier",100.0,30);
-		BasicAttaque attaque5 = new  BasicAttaque("coup d'épée","donne un coup d'épée",60.0,60);
-		BasicAttaque attaque6 = new  BasicAttaque("lancer de bouclier","lancer votre bouclier",50.0,50);
+		BasicAttaque attaque5 = new  BasicAttaque("coup d'épée","donne un coup d'épée",100.0,60);
+		BasicAttaque attaque6 = new  BasicAttaque("lancer de bouclier","lancer votre bouclier",100.0,50);
 
 		listeAttaque2.add(attaque4);
 		listeAttaque2.add(attaque5);
@@ -244,9 +244,9 @@ public class Monde {
 		listeClasse.put("chevalier", classe2);
 
 		List<Attaque> listeAttaque3 = new ArrayList<>();
-		BasicAttaque attaque7 = new  BasicAttaque("coup sournois","donne un coup de dague dans le dos",50.0,70);
-		BasicAttaque attaque8 = new  BasicAttaque("lancer dague","lancer votre dague",60.0,60);
-		BasicAttaque attaque9 = new  BasicAttaque("poison","lance du poison sur votre adversaire",40.0,30);
+		BasicAttaque attaque7 = new  BasicAttaque("coup sournois","donne un coup de dague dans le dos",100.0,70);
+		BasicAttaque attaque8 = new  BasicAttaque("lancer dague","lancer votre dague",100.0,60);
+		BasicAttaque attaque9 = new  BasicAttaque("poison","lance du poison sur votre adversaire",100.0,30);
 
 		listeAttaque3.add(attaque7);
 		listeAttaque3.add(attaque8);
@@ -265,7 +265,7 @@ public class Monde {
 
 		Groupe groupeMonstre = new Groupe();
 		List<Combattant> listeMonstre = new ArrayList<>();
-		int maxPvMonstre = 200;
+		int maxPvMonstre = 10;
 		int maxDegatMonstre = 50;
 
 		for (int i = 0; i < nombreMonstre; i++) {
@@ -277,7 +277,7 @@ public class Monde {
 			String nomMonstre = nomMonstre();
 			monstre.setNom(nomMonstre);
 			monstre.setPointDeVie(pvMonstre);
-			monstre.setDegats(degatMonstre);
+			monstre.setDegats(0);
 
 			listeMonstre.add(monstre);
 
@@ -413,6 +413,20 @@ public class Monde {
 	}
 	public static void combatGroupe(Groupe personnages , Groupe monstres) {
 		
+		boolean tour = true;
+		while(personnages.estMort() == false || monstres.estMort() == false) {
+			if (tour) {
+				monstres.attaquerGroupe(personnages);
+			}else {
+				personnages.attaquerGroupe(monstres);
+			}
+			tour = !tour;
+		}
+		if(personnages.estMort() == true) {
+			System.out.println("les monstre on gagné");
+		}else if (monstres.estMort() == true) {
+			System.out.println("les personnges on gagné");
+		}
 	}
 	public static void combatSolo(Groupe personnages , Groupe monstres) {
 		
