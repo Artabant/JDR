@@ -154,7 +154,7 @@ public class Monde {
 	}
 	
 	/**
-	 * Permte de créer un classe manuellement
+	 * creer une classe manuellement
 	 */
 	public static void generationClasse() {
 
@@ -412,10 +412,10 @@ public class Monde {
 
 	}
 	public static void combatGroupe(Groupe personnages , Groupe monstres) {
-
+		
 	}
 	public static void combatSolo(Groupe personnages , Groupe monstres) {
-
+		
 	}
 	public static void information(Groupe personnages , Groupe monstres) {
 		System.out.println(personnages);
